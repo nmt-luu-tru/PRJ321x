@@ -1,70 +1,99 @@
-### Introduction to Using HTML Forms with JSP
+# Hướng Dẫn Sử Dụng HTML Forms với JSP
 
-In this tutorial, we'll explore how to utilize HTML forms within JSP (JavaServer Pages). The key topics covered include an overview of HTML forms, how to create them, and how to process the form data using JSP. By the end of this guide, you'll be able to build an HTML form that collects student information and processes it with JSP.
+Trong video này, chúng ta sẽ học cách sử dụng HTML forms kết hợp với JSP (JavaServer Pages) để tạo ra một form nhập liệu cơ bản và xử lý dữ liệu trên server. Đây là một phần quan trọng trong việc xây dựng các ứng dụng web động, cho phép người dùng tương tác và gửi thông tin qua các biểu mẫu.
 
-### Understanding HTML Forms
+## Nội Dung Bài Học
 
-HTML forms are a fundamental part of web development. If you've ever logged in to a website using a username and password or booked a flight or hotel online, you've interacted with an HTML form. Forms are used to collect user data, which is then sent to a server for processing.
+Chúng ta sẽ lần lượt đi qua các bước sau:
 
-### Building an HTML Form
+1. **Ôn Tập Về HTML Forms**: Tìm hiểu cơ bản về cách tạo HTML forms và cấu trúc của chúng.
+2. **Xây Dựng HTML Form**: Tạo một biểu mẫu nhập thông tin học viên với các trường như tên và họ.
+3. **Đọc Dữ Liệu Từ Form Với JSP**: Xử lý và đọc dữ liệu từ biểu mẫu gửi lên bằng trang JSP.
+4. **Gửi Phản Hồi**: Hiển thị thông tin xác nhận về những dữ liệu mà người dùng đã nhập vào.
 
-Let's start by creating an HTML form designed to collect a student's first and last name. The form will include two text fields and a submit button.
+## HTML Forms là Gì?
 
-Here's a simple example of an HTML form:
+HTML forms là một thành phần cơ bản trong hầu hết các website mà chúng ta tương tác hàng ngày. Nếu bạn đã từng đăng nhập vào một trang web bằng tên người dùng và mật khẩu, hoặc đặt vé máy bay hay đặt phòng khách sạn, thì bạn đã tương tác với một **HTML form**. Chúng ta sẽ bắt đầu bằng việc tạo một biểu mẫu HTML cho phép học viên nhập thông tin của mình.
+
+## Tạo HTML Form Đơn Giản
+
+Dưới đây là mã nguồn để tạo một form HTML cơ bản cho thông tin học viên, bao gồm trường nhập liệu cho tên và họ, cùng một nút gửi (submit):
 
 ```html
-<form action="student-response.jsp" method="post">
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="firstName"><br><br>
-
-    <label for="lastName">Last Name:</label>
-    <input type="text" id="lastName" name="lastName"><br><br>
-
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information Form</title>
+</head>
+<body>
+    <h2>Student Information</h2>
+    <form action="student-response.jsp" method="post">
+        First Name: <input type="text" name="firstName"><br><br>
+        Last Name: <input type="text" name="lastName"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
 ```
 
-In this form:
-- The `form` tag defines the form itself and specifies where to send the data using the `action` attribute. In this case, the form data will be sent to `student-response.jsp` for processing.
-- The `input` tags define the fields where users can enter data. The `name` attribute is crucial as it identifies the data fields on the server side.
-- The `submit` button sends the form data to the server.
+### Giải Thích:
 
-### Processing Form Data with JSP
+- **Thẻ `<form>`**: Xác định một biểu mẫu trong HTML. Thuộc tính `action` xác định nơi gửi dữ liệu biểu mẫu, ở đây là trang `student-response.jsp`. Thuộc tính `method` là `post` để gửi dữ liệu theo phương thức POST.
+- **Các trường nhập liệu (`input type="text"`)**: Sử dụng cho việc nhập tên (`name="firstName"`) và họ (`name="lastName"`). Tên (`name`) của các trường này sẽ được dùng để đọc dữ liệu trên server.
+- **Nút Gửi (`input type="submit"`)**: Gửi dữ liệu biểu mẫu đến trang JSP đã chỉ định trong thuộc tính `action`.
 
-Once the form is submitted, the data is sent to the `student-response.jsp` page for processing. In JSP, you can access the submitted data using the `request.getParameter()` method.
+## Đọc Dữ Liệu Form Bằng JSP
 
-Here’s an example of how to process the form data:
+Dưới đây là mã JSP để xử lý dữ liệu mà người dùng nhập vào từ biểu mẫu:
 
 ```jsp
-<%
-    String firstName = request.getParameter("firstName");
-    String lastName = request.getParameter("lastName");
-%>
-
-<p>The student is confirmed:</p>
-<p>First Name: <%= firstName %></p>
-<p>Last Name: <%= lastName %></p>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Confirmation</title>
+</head>
+<body>
+    <h2>Student Information Confirmation</h2>
+    <p>The student is confirmed.</p>
+    <p>First Name: <%= request.getParameter("firstName") %></p>
+    <p>Last Name: <%= request.getParameter("lastName") %></p>
+</body>
+</html>
 ```
 
-In this JSP snippet:
-- `request.getParameter("firstName")` retrieves the value entered in the "firstName" field of the form.
-- `request.getParameter("lastName")` retrieves the value from the "lastName" field.
-- The retrieved values are then displayed on the confirmation page.
+### Giải Thích:
 
-### Alternate Syntax for Displaying Form Data
+- **`<%= request.getParameter("firstName") %>`**: Đây là cách để đọc dữ liệu từ biểu mẫu mà người dùng đã gửi. `request.getParameter("firstName")` sẽ trả về giá trị của trường `firstName` trong biểu mẫu HTML. Tương tự với `lastName`.
+- **Hiển thị thông tin**: Dữ liệu mà người dùng nhập sẽ được hiển thị trở lại trên trang xác nhận, giúp người dùng kiểm tra thông tin mình đã điền.
 
-JSP also offers a shortcut method for displaying form data using the `${param}` syntax. This method is useful for simplifying code when you only need to display form data.
+## Phương Pháp Khác Để Đọc Dữ Liệu Form Trong JSP
 
-Here’s how you can use it:
+Ngoài cách sử dụng `request.getParameter()`, bạn có thể sử dụng một cú pháp ngắn gọn hơn với `param` như sau:
 
 ```jsp
-<p>The student is confirmed:</p>
-<p>First Name: ${param.firstName}</p>
-<p>Last Name: ${param.lastName}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Confirmation</title>
+</head>
+<body>
+    <h2>Student Information Confirmation</h2>
+    <p>The student is confirmed.</p>
+    <p>First Name: ${param.firstName}</p>
+    <p>Last Name: ${param.lastName}</p>
+</body>
+</html>
 ```
 
-This approach is a more concise way of writing the JSP code. However, note that it’s mainly used for displaying data and not for processing it in scriptlets.
+### Giải Thích:
 
-### Conclusion and Next Steps
+- **`${param.firstName}`**: Đây là cách viết ngắn gọn để lấy giá trị của trường `firstName` trong form. `param` là một đối tượng trong JSP được sử dụng để lấy dữ liệu từ biểu mẫu. Cách này chỉ dùng để hiển thị dữ liệu và không thể sử dụng trong scriptlet hoặc logic phức tạp khác.
 
-In this section, we covered the basics of creating an HTML form, capturing data, and processing it using JSP. In the next video, we’ll dive into a live coding demo where we'll implement this code in Eclipse. This will give you hands-on experience in building and processing HTML forms with JSP.
+## Tóm Tắt
+
+Qua bài học này, bạn đã biết cách tạo một biểu mẫu HTML đơn giản để nhập thông tin học viên và sử dụng JSP để đọc và hiển thị thông tin này. Đây là một ví dụ cơ bản nhưng rất hữu ích để hiểu về cách tương tác giữa frontend (HTML) và backend (JSP) trong một ứng dụng web. 
+
+Trong video tiếp theo, chúng ta sẽ thực hành viết mã trong Eclipse và thực hiện chạy ứng dụng để xem kết quả.
