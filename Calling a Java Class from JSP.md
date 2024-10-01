@@ -1,74 +1,120 @@
+# Hướng Dẫn Gọi Lớp Java Từ Trang JSP
 
-### Introduction: Calling a Java Class from JSP
-In this video, we'll explore how to call a Java class from a JSP page. Previously, we discussed minimizing the use of scriptlets and declarations within JSP pages to keep your code clean and maintainable. One effective way to do this is by refactoring your business logic into separate Java classes. This video will guide you through the process of creating a Java class and calling it from a JSP file.
+Trong video này, chúng ta sẽ học cách gọi một lớp Java từ trang JSP. Đây là một phương pháp tốt để tách rời các đoạn mã Java phức tạp khỏi JSP, giúp cho mã nguồn trở nên dễ bảo trì và dễ đọc hơn.
 
-### Why Refactor Java Code into Separate Classes?
-**Best Practices**: Including large amounts of Java code directly in JSP files can lead to poor design and maintainability issues. Instead, you should:
-- **Minimize Scriptlets and Declarations**: Use them sparingly for small tasks, but avoid filling your JSP pages with complex logic.
-- **Refactor to Java Classes**: Move your business logic to separate Java classes. This allows you to reuse code and keep your JSP pages clean.
-- **Utilize MVC Architecture**: For more complex applications, consider using the Model-View-Controller (MVC) pattern to separate business logic from the presentation layer.
+## 1. Tại Sao Phải Sử Dụng Lớp Java Riêng Biệt?
 
-### Step 1: Creating the Java Class
-**To-Do List**:
-1. **Create the Java Class**: We'll start by creating a new Java class that contains our business logic.
-2. **Call the Java Class from the JSP Page**: Next, we'll make a call to this class from our JSP page.
+Như đã đề cập trong các video trước, bạn muốn hạn chế số lượng scriptlet và các đoạn mã Java phức tạp trong JSP. Việc đưa các đoạn mã dài vào trong JSP không chỉ làm cho mã nguồn trở nên khó quản lý mà còn khiến hiệu suất xử lý trở nên kém hiệu quả.
 
-**Implementation**:
-1. **Creating a Package**:
-   - Open your existing `jspdemo` project in Eclipse.
-   - Navigate to `Java Resources > src`.
-   - Right-click on `src` and select `New > Package`.
-   - Name the package `com.luv2code.jsp` and click `Finish`.
+Để giải quyết vấn đề này, bạn có thể:
+- Tách riêng các đoạn mã phức tạp thành các lớp Java riêng biệt.
+- Sử dụng mô hình MVC (Model-View-Controller).
 
-2. **Creating the Java Class**:
-   - Right-click on the newly created package `com.luv2code.jsp`.
-   - Select `New > Class`.
-   - Name the class `FunUtils` and click `Finish`.
+Trong video này, chúng ta sẽ thực hiện việc tách riêng mã thành một lớp Java.
 
-**Example Code for FunUtils**:
+## 2. Kế Hoạch Thực Hiện
+
+### To-do List
+
+1. **Tạo lớp Java:** Chứa phương thức xử lý dữ liệu.
+2. **Gọi lớp Java từ trang JSP:** Sử dụng lớp này để xử lý dữ liệu và hiển thị kết quả trên trang JSP.
+
+## 3. Thực Hiện Trong Eclipse
+
+Chúng ta sẽ thực hiện theo từng bước như sau:
+
+### Bước 1: Tạo Lớp Java Mới
+
+1. Mở dự án **jspdemo** trong Eclipse.
+2. Trong **Java Resources** -> **src**, nhấp chuột phải và chọn **New** -> **Package**.
+3. Đặt tên cho package là `com.luv2code.jsp` và nhấp **Finish**.
+
+4. Nhấp chuột phải vào package vừa tạo, chọn **New** -> **Class**.
+5. Đặt tên lớp là `FunUtils`.
+6. Nhấp **Finish** để tạo lớp.
+
+### Bước 2: Thêm Phương Thức Vào Lớp Java
+
+Trong lớp `FunUtils.java`, thêm mã sau:
+
 ```java
 package com.luv2code.jsp;
 
 public class FunUtils {
+
+    // Phương thức chuyển đổi chuỗi thành chữ thường
     public static String makeItLower(String data) {
         return data.toLowerCase();
     }
 }
 ```
 
-**Explanation**:
-- **Class Creation**: The `FunUtils` class contains a static method `makeItLower`, which takes a string input and returns it in lowercase.
-- **Refactoring**: This method was previously written directly in a JSP declaration. By moving it to a separate class, we make our code more modular and easier to maintain.
+- Phương thức `makeItLower` sẽ nhận một chuỗi và trả về phiên bản chữ thường của chuỗi đó.
 
-### Step 2: Calling the Java Class from JSP
-**Implementation**:
-1. **Create a New JSP File**:
-   - Navigate to the `WebContent` directory in your project.
-   - Right-click on `WebContent` and select `New > File`.
-   - Name the file `fun-test.jsp` and click `Finish`.
+### Bước 3: Tạo Trang JSP Để Gọi Lớp Java
 
-2. **Write the HTML and JSP Code**:
-   - Start by setting up the basic HTML structure.
-   - Use a JSP expression to call the `makeItLower` method from the `FunUtils` class.
+1. Nhấp chuột phải vào thư mục **WebContent**.
+2. Chọn **New** -> **File**.
+3. Đặt tên tệp là `fun-test.jsp` và nhấp **Finish**.
 
-**Example Code for fun-test.jsp**:
-```html
-<%@ page import="com.luv2code.jsp.FunUtils" %>
+### Bước 4: Viết Mã JSP Để Gọi Lớp Java
+
+Trong tệp `fun-test.jsp`, thêm mã sau:
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JSP Java Class Integration</title>
+</head>
 <body>
-    <h3>Let's have some fun:</h3>
-    <%= FunUtils.makeItLower("FUN FUN FUN") %>
+    <h3>Let's have some fun!</h3>
+    
+    <%@ page import="com.luv2code.jsp.FunUtils" %>
+    
+    <!-- Sử dụng lớp FunUtils để chuyển chuỗi thành chữ thường -->
+    <p>Kết quả: 
+        <%= FunUtils.makeItLower("FUN FUN FUN") %>
+    </p>
 </body>
+</html>
 ```
 
-**Explanation**:
-- **Import Statement**: The import statement `<%@ page import="com.luv2code.jsp.FunUtils" %>` allows us to use the `FunUtils` class in our JSP without needing to reference the full package name each time.
-- **JSP Expression**: We use `<%= FunUtils.makeItLower("FUN FUN FUN") %>` to call the `makeItLower` method. The string "FUN FUN FUN" is passed to the method, and the lowercase result is included in the HTML output.
+- Dòng `<%@ page import="com.luv2code.jsp.FunUtils" %>` dùng để import lớp `FunUtils` vào trang JSP.
+- Gọi phương thức `FunUtils.makeItLower("FUN FUN FUN")` để chuyển chuỗi `"FUN FUN FUN"` thành chữ thường và hiển thị kết quả.
 
-### Running the JSP File
-**Steps**:
-- Right-click on `fun-test.jsp` and select `Run As > Run on Server`.
-- If prompted to restart the server (due to the new class addition), click `OK`.
-- The output will display in your browser, showing the text "fun fun fun" in lowercase.
+### Bước 5: Chạy Trang JSP
 
-### Conclusion: Calling Java Classes from JSP
-In this video, we successfully refactored Java code into a separate class and called it from a JSP page. This approach helps keep your JSP files clean and maintainable while allowing you to reuse code across multiple pages. In future videos, we'll explore more advanced techniques, so stay tuned!
+1. Nhấp chuột phải vào tệp `fun-test.jsp`.
+2. Chọn **Run As** -> **Run on Server**.
+3. Chọn máy chủ Tomcat nếu được nhắc nhở và nhấp **Finish**.
+
+### Kết Quả
+
+Trình duyệt sẽ mở và hiển thị kết quả:
+
+```
+Let's have some fun!
+
+Kết quả: fun fun fun
+```
+
+Kết quả hiển thị đúng cho thấy rằng trang JSP đã gọi thành công phương thức `makeItLower` từ lớp Java `FunUtils` để chuyển chuỗi `"FUN FUN FUN"` thành `"fun fun fun"`.
+
+## 4. Tổng Kết
+
+Trong video này, chúng ta đã học cách:
+
+1. Tạo một lớp Java riêng biệt để chứa các phương thức xử lý dữ liệu.
+2. Gọi lớp Java từ trang JSP bằng cách sử dụng `import`.
+3. Thực hiện xử lý dữ liệu và hiển thị kết quả trên trang JSP.
+
+### Lưu Ý:
+
+- **Hạn chế mã Java trong JSP:** Hãy luôn tách biệt mã Java phức tạp ra khỏi JSP để mã dễ quản lý và bảo trì hơn.
+- **Sử dụng mô hình MVC:** Ở những bài học sau, chúng ta sẽ tìm hiểu cách sử dụng mô hình MVC để xây dựng các ứng dụng web mạnh mẽ hơn.
+
+### Tiếp Theo
+
+Trong các bài học tiếp theo, chúng ta sẽ tìm hiểu cách kết hợp JSP với Servlets để xây dựng các ứng dụng web hoàn chỉnh và mạnh mẽ hơn.
