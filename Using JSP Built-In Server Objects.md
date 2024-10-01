@@ -1,59 +1,91 @@
+# Hướng Dẫn Sử Dụng Các Đối Tượng Server Được Tích Hợp Sẵn Trong JSP
 
-### Introduction: Using JSP Built-In Server Objects
-In this video, I'll show you how to make use of JSP built-in server objects. These objects are provided by the JSP environment, meaning you don't need to create them—they're available for you to use directly in your JSP pages. We'll explore some of the most commonly used server objects and demonstrate how to access and utilize them in your applications.
+## Giới Thiệu
 
-### What Are JSP Built-In Server Objects?
-**Definition**: JSP built-in server objects are pre-defined objects that are automatically available in your JSP pages. These objects allow you to interact with the server, access client information, and manage user sessions without the need to manually create these objects.
+Trong video này, chúng ta sẽ học cách sử dụng các đối tượng server được tích hợp sẵn trong JSP. Đây là các đối tượng được cung cấp sẵn bởi môi trường JSP và có thể được sử dụng trực tiếp mà không cần phải tạo mới.
 
-**Commonly Used JSP Server Objects**:
-1. **`request`**: Contains information about the HTTP request, including headers and form data. You'll often use this object to read data sent by the client, such as form inputs.
-2. **`response`**: Used to send HTTP-specific information back to the client. This includes setting headers, managing cookies, and controlling the content sent to the client.
-3. **`out`**: A `JspWriter` object used to send output to the client. You've already used this object in previous videos for methods like `out.println()`.
-4. **`session`**: Represents a unique session for each user. It's commonly used to store user-specific data, similar to a shopping cart in an online store.
-5. **`application`**: Shared across all users of a web application. It's used to store global data that can be accessed by all users.
+## Các Đối Tượng Server Thường Dùng Trong JSP
 
-**Note**: This is not an exhaustive list. There are other server objects available, but these are the most commonly used in JSP applications.
+Dưới đây là danh sách các đối tượng server phổ biến trong JSP:
 
-### How JSP Built-In Server Objects Work
-**Request/Response Cycle**:
-- **Request Object**: When a client (browser) makes an HTTP request to a JSP page, a `request` object is automatically created. This object contains information about the request, such as headers and body data.
-- **Response Object**: After processing the request, the JSP page sends back a response using the `response` object. This response includes the content to be displayed in the client's browser.
+1. **`request`**: Chứa thông tin về các header HTTP và dữ liệu từ form.
+2. **`response`**: Dùng để gửi lại thông tin HTTP như header và dữ liệu trả về.
+3. **`out`**: Dùng để xuất dữ liệu ra trang JSP. Chúng ta đã sử dụng đối tượng này trong các ví dụ trước với `out.println`.
+4. **`session`**: Đối tượng session duy nhất cho mỗi người dùng, giống như một giỏ hàng khi bạn mua sắm trực tuyến.
+5. **`application`**: Đối tượng được chia sẻ cho tất cả người dùng của một ứng dụng web.
 
-### Example: Using the Request Object in JSP
-**Scenario**: Let's create a simple JSP page that uses the `request` object to determine the type of browser and the language preference of the user.
+Đây là các đối tượng được sử dụng rộng rãi trong các ứng dụng JSP để xử lý dữ liệu từ người dùng và trả kết quả về trình duyệt.
 
-**Steps**:
-1. **Create a New JSP File**:
-   - In Eclipse, open your existing project (`jspdemo`).
-   - Navigate to the `WebContent` folder, right-click, and select `New > File`.
-   - Name the file `builtin-test.jsp` and click `Finish`.
+## Ý Tưởng Sử Dụng `request` Và `response` 
 
-2. **Write the HTML and JSP Code**:
-   - Set up the basic HTML structure and use the `request` object to access the client's browser and language information.
+Trong mô hình giao tiếp giữa trình duyệt và JSP, khi người dùng gửi yêu cầu đến server, một đối tượng `request` sẽ được tạo ra chứa thông tin về yêu cầu đó, như header và body của HTTP request. Sau đó, JSP sẽ xử lý thông tin này và trả về kết quả dưới dạng `response`.
 
-**Example Code**:
-```html
+## Thực Hiện Mã Ví Dụ Trong Eclipse
+
+Chúng ta sẽ thực hiện một ví dụ đơn giản để lấy thông tin về trình duyệt và ngôn ngữ mà người dùng đang sử dụng từ đối tượng `request`.
+
+### Bước 1: Tạo Trang JSP Mới
+
+1. Mở dự án **jspdemo** trong Eclipse.
+2. Mở thư mục **WebContent**.
+3. Nhấp chuột phải, chọn **New** -> **File**.
+4. Đặt tên cho tệp là `builtin-test.jsp`.
+5. Nhấp **Finish**.
+
+### Bước 2: Viết Mã JSP Sử Dụng Đối Tượng `request`
+
+Trong tệp `builtin-test.jsp`, thêm mã sau:
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JSP Built-In Objects Example</title>
+</head>
 <body>
-    <h3>Browser and Language Information</h3>
-    <p>Request User-Agent: <%= request.getHeader("User-Agent") %></p>
-    <p>Request Language: <%= request.getLocale() %></p>
+    <h3>JSP Built-In Server Objects Example</h3>
+    
+    <!-- Đọc thông tin từ đối tượng request -->
+    <p>Request User Agent: 
+        <%= request.getHeader("User-Agent") %>
+    </p>
+    
+    <p>Request Locale (Ngôn ngữ người dùng): 
+        <%= request.getLocale() %>
+    </p>
 </body>
+</html>
 ```
 
-**Explanation**:
-- **`request.getHeader("User-Agent")`**: Retrieves the `User-Agent` header from the request, which contains information about the client's browser and operating system.
-- **`request.getLocale()`**: Retrieves the locale setting from the request, indicating the language preference set in the client's browser.
+### Bước 3: Chạy Trang JSP
 
-### Running the JSP File
-**Steps**:
-- Right-click on `builtin-test.jsp`, select `Run As > Run on Server`.
-- The application will display the client's browser and operating system information, as well as the language preference.
+1. Nhấp chuột phải vào tệp `builtin-test.jsp`.
+2. Chọn **Run As** -> **Run on Server**.
+3. Chọn máy chủ Tomcat nếu được nhắc nhở và nhấp **Finish**.
 
-**Output**:
-- The output will show details about the browser (e.g., Chrome, Firefox) and operating system (e.g., macOS, Windows) the client is using. It will also display the preferred language (e.g., English, Spanish).
+### Kết Quả
 
-**Testing in Different Browsers**:
-- You can copy the URL of the JSP page and paste it into different browsers to see how the `User-Agent` and language information changes based on the browser and system you're using.
+- **Request User Agent**: Hiển thị loại trình duyệt và hệ điều hành mà người dùng đang sử dụng, ví dụ: `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36`.
+- **Request Locale (Ngôn ngữ người dùng)**: Hiển thị ngôn ngữ mà người dùng đang sử dụng trong trình duyệt, ví dụ: `en_US` (tiếng Anh Hoa Kỳ).
 
-### Conclusion: Using JSP Built-In Server Objects
-In this video, we explored how to use JSP built-in server objects, specifically the `request` object, to gather information about the client's browser and language preference. These objects are essential tools for developing dynamic web applications. In the next videos, we'll dive deeper into other server objects and demonstrate their use in real-world scenarios.
+### Kiểm Tra Với Trình Duyệt Khác
+
+1. Sao chép URL của trang `builtin-test.jsp`.
+2. Mở một trình duyệt khác (như Chrome hoặc Firefox) và dán URL đó vào thanh địa chỉ.
+3. Nhấn Enter và kiểm tra kết quả hiển thị.
+
+Kết quả sẽ hiển thị khác nhau tùy thuộc vào loại trình duyệt và hệ điều hành mà bạn đang sử dụng.
+
+## Tổng Kết
+
+Trong video này, chúng ta đã học cách:
+
+1. **Sử dụng đối tượng `request` trong JSP**: Lấy thông tin về trình duyệt và ngôn ngữ của người dùng.
+2. **Hiển thị kết quả**: Sử dụng `request.getHeader("User-Agent")` để hiển thị thông tin về trình duyệt, và `request.getLocale()` để hiển thị ngôn ngữ người dùng.
+
+## Kết Luận
+
+Đây là ví dụ cơ bản về cách sử dụng các đối tượng server được tích hợp sẵn trong JSP. Trong các video tiếp theo, chúng ta sẽ tìm hiểu thêm về cách sử dụng các đối tượng khác như `response`, `session`, và `application` để xây dựng các ứng dụng web phức tạp hơn.
+
+Hãy theo dõi và thực hành để nắm vững cách làm việc với các đối tượng server trong JSP!
