@@ -1,77 +1,97 @@
+# Hướng Dẫn Sử Dụng JSP Declarations
 
-### Introduction: Understanding JSP Declarations
-In this video, we'll explore JSP Declarations, a feature that allows you to declare methods directly within your JSP pages. This can be particularly useful when you need to reuse code within the same page. We’ll cover how to create a method in JSP and how to use it effectively.
+Trong video này, chúng ta sẽ tìm hiểu cách sử dụng **JSP Declarations** để khai báo các phương thức hoặc biến trong trang JSP của bạn. JSP Declarations cho phép bạn tạo và sử dụng lại các phương thức Java trong cùng một trang JSP, giúp cho việc quản lý mã trở nên dễ dàng và linh hoạt hơn.
 
-### What is a JSP Declaration?
-**Definition**: A JSP Declaration is a construct that allows you to declare methods or variables within your JSP page. The declared methods can be called multiple times within the same page, just like in any regular Java code.
+## 1. JSP Declarations Là Gì?
 
-**Syntax**: The syntax for a JSP Declaration is `<%! method_declaration %>`. The exclamation point (`!`) after the opening tag signifies that this is a declaration.
+- **JSP Declarations** cho phép bạn khai báo các phương thức và biến trong trang JSP, giống như cách bạn làm trong một lớp Java thông thường.
+- Các phương thức này có thể được gọi và sử dụng lại trong cùng trang JSP.
+- Cú pháp của JSP Declarations là: `<%! ...mã_khai_báo... %>`
 
-**Purpose**: Declarations are useful when you need to execute the same code multiple times on the page. Instead of repeating the code, you can encapsulate it in a method and call that method whenever needed.
+### Cú Pháp Cơ Bản Của JSP Declarations
 
-### Example: Declaring a Method in JSP
-**Code Example**:
-```html
+```jsp
 <%! 
+    // Khai báo một phương thức trong JSP
     public String makeItLower(String data) {
         return data.toLowerCase();
     }
 %>
 ```
 
-**Explanation**:
-- **Method Declaration**: In this example, we declare a method called `makeItLower` that takes a `String` parameter called `data` and returns the lowercase version of that string.
-- **JSP Declaration**: The method is enclosed within the JSP Declaration syntax (`<%! ... %>`), which allows it to be used elsewhere on the page.
+- Trong ví dụ trên, chúng ta khai báo một phương thức `makeItLower` với tham số đầu vào là một chuỗi `String` và trả về giá trị là chuỗi đã được chuyển đổi thành chữ thường (`toLowerCase`).
+- Phương thức này sẽ được sử dụng để chuyển đổi các chuỗi sang dạng chữ thường và có thể được gọi ở bất cứ đâu trong cùng trang JSP này.
 
-### Using the Declared Method in JSP
-**Code Example**:
-```html
+## 2. Cách Sử Dụng JSP Declarations Trong Thực Tế
+
+Chúng ta sẽ đi qua một ví dụ cụ thể trong Eclipse để hiểu rõ hơn cách sử dụng JSP Declarations.
+
+### Bước 1: Tạo Tệp `declaration-test.jsp`
+
+1. Mở dự án **JSPDemo** mà bạn đã tạo trong các bài học trước.
+2. Nhấp chuột phải vào thư mục **WebContent**, chọn **New** -> **File**.
+3. Đặt tên tệp là `declaration-test.jsp` và nhấp **Finish**.
+
+### Bước 2: Viết Mã JSP Declarations Và Gọi Phương Thức
+
+Dán đoạn mã dưới đây vào tệp `declaration-test.jsp`:
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JSP Declarations Demo</title>
+</head>
 <body>
-    <h3>Lower case "Hello World":</h3>
-    <%= makeItLower("Hello World") %>
+    <h3>Ví dụ về JSP Declarations</h3>
+    
+    <%! 
+        // Khai báo một phương thức chuyển đổi chuỗi thành chữ thường
+        public String makeItLower(String data) {
+            return data.toLowerCase();
+        }
+    %>
+    
+    <!-- Gọi phương thức đã khai báo bằng JSP Expression -->
+    <p>Chữ thường của "Hello World" là: 
+        <%= makeItLower("Hello World") %>
+    </p>
 </body>
+</html>
 ```
 
-**Explanation**:
-- **Calling the Method**: We use a JSP Expression (`<%= ... %>`) to call the `makeItLower` method and pass the string "Hello World" as an argument. The method returns the lowercase version of the string, which is then included in the HTML output.
-- **Output**: The resulting HTML will display "lower case hello world" on the page.
+### Bước 3: Chạy Tệp `declaration-test.jsp`
 
-### Best Practices for JSP Declarations
-**Minimize Declarations**: While JSP Declarations are powerful, it’s important to use them sparingly to avoid cluttering your JSP files with excessive Java code. Here are some best practices:
-- **Avoid Overuse**: Don’t overload your JSP page with numerous method declarations. This can make your code harder to maintain and understand.
-- **Refactor Complex Logic**: If you have complex logic that needs to be reused, consider moving that logic to a separate Java class rather than keeping it within the JSP page.
-- **Use MVC Architecture**: For larger applications, using the Model-View-Controller (MVC) pattern helps separate the business logic from the presentation layer. This makes your application more modular and easier to manage.
+1. Nhấp chuột phải vào tệp `declaration-test.jsp`.
+2. Chọn **Run As** -> **Run on Server**.
+3. Chọn máy chủ Tomcat đã được cấu hình trước và nhấp **Finish**.
 
-### Implementing JSP Declarations in Eclipse
-**Step-by-Step Guide**:
-1. **Create a New JSP File**:
-   - Open your existing project (`JSPDemo`) in Eclipse.
-   - Navigate to the `WebContent` directory, right-click, and select `New > File`.
-   - Name the file `declaration-test.jsp` and click `Finish`.
+### Kết Quả
 
-2. **Write the HTML and Declaration Code**:
-   - Start by setting up the basic HTML structure with a `<body>` tag.
-   - Add the JSP Declaration to define the `makeItLower` method.
+Khi chạy thành công, trình duyệt sẽ mở ra và hiển thị kết quả:
 
-   **Example Code**:
-   ```html
-   <body>
-       <%! 
-           public String makeItLower(String data) {
-               return data.toLowerCase();
-           }
-       %>
-       <h3>Lower case "Hello World":</h3>
-       <%= makeItLower("Hello World") %>
-   </body>
-   ```
+```
+Ví dụ về JSP Declarations
 
-3. **Run the JSP File**:
-   - Right-click on `declaration-test.jsp`, select `Run As > Run on Server`.
-   - Choose the Tomcat server and click `Finish`.
+Chữ thường của "Hello World" là: hello world
+```
 
-4. **View the Output**:
-   - The output will be displayed in your browser, showing "Lower case 'Hello World': hello world".
+- Phương thức `makeItLower` đã được gọi để chuyển chuỗi `"Hello World"` thành chữ thường và kết quả được hiển thị trong trang HTML.
 
-### Conclusion: Mastering JSP Declarations
-In this video, we learned how to use JSP Declarations to define methods within a JSP page and how to call these methods to generate dynamic content. Remember to use JSP Declarations wisely, keeping your code clean and maintainable. In the next video, we’ll dive into more advanced JSP techniques, so stay tuned!
+## 3. Lưu Ý Khi Sử Dụng JSP Declarations
+
+- **Hạn chế viết quá nhiều mã Java trong JSP**: Đừng viết quá nhiều phương thức phức tạp trong trang JSP vì điều này có thể khiến mã trở nên khó bảo trì và khó đọc.
+- **Tách logic ra thành các lớp Java riêng biệt nếu cần**: Nếu có nhiều logic cần xử lý, hãy tách chúng ra thành các lớp Java riêng biệt để duy trì và quản lý tốt hơn.
+
+## 4. Tổng Kết
+
+Trong bài học này, chúng ta đã tìm hiểu về **JSP Declarations** và cách sử dụng chúng để khai báo các phương thức trong trang JSP. Đây là một công cụ mạnh mẽ cho phép bạn quản lý mã tốt hơn và tái sử dụng các đoạn mã Java trong trang của mình. 
+
+### Những Điều Bạn Có Thể Làm Tiếp Theo
+
+- Thử nghiệm khai báo thêm các phương thức khác như `makeItUpper` để chuyển chuỗi thành chữ in hoa.
+- Kết hợp các phương thức này với các thành phần khác như **JSP Scriptlets** hoặc **JSP Expressions** để tạo ra các trang web phức tạp và động hơn.
+- Khám phá cách kết hợp giữa JSP và Servlets để xây dựng các ứng dụng web hoàn chỉnh và mạnh mẽ hơn.
+
+Tiếp tục theo dõi các bài học tiếp theo để tìm hiểu thêm về **JSP Directives** và cách tạo ra các thành phần web mạnh mẽ hơn!
