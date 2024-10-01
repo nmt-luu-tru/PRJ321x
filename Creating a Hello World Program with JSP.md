@@ -1,70 +1,95 @@
+# Hướng Dẫn Tạo Chương Trình "Hello World" Với JSP
 
-### Creating a "Hello World" Program with JSP
-In this tutorial, I'll demonstrate how to create a simple "Hello World" program using JavaServer Pages (JSP). We'll cover the basics of JSP, how it integrates with HTML, where to place JSP files, and how to run them in a web server.
+Trong video này, chúng ta sẽ học cách tạo một chương trình "Hello World" cơ bản với JSP (JavaServer Pages). Đây là bước đầu tiên để bạn làm quen với cách tạo các trang web động bằng cách sử dụng JSP. Chúng ta sẽ tạo một tệp JSP đơn giản, viết mã HTML và chèn một đoạn mã Java để hiển thị thời gian hiện tại trên server.
 
-### What is a JSP File?
-**Definition**: A JSP file is essentially an HTML page that includes some Java code. This combination allows the page to generate dynamic content, meaning the content can change based on the logic provided by the Java code.
+## 1. JSP Là Gì?
 
-**Example**: Imagine an HTML page that displays the current date and time. With JSP, you can insert Java code that retrieves the current timestamp and displays it within your HTML content.
+JSP là một trang HTML có chứa mã Java để tạo ra nội dung động. Bằng cách chèn mã Java vào HTML, JSP cho phép bạn tạo ra các trang HTML động dựa trên các yêu cầu từ phía người dùng hoặc các thao tác trên server.
 
-### Anatomy of a JSP File
-**Structure**: A typical JSP file consists of standard HTML tags along with Java code. The Java code is inserted using special syntax, allowing it to execute on the server and generate the final HTML output.
+### Cách Thức Hoạt Động Của JSP
 
-**Diagram Explanation**: In a basic JSP file, you'll find sections of HTML code interspersed with Java code. The Java code executes on the server and the resulting output is merged into the HTML content, which is then sent to the user's browser.
+- **Quá trình xử lý**: Khi bạn yêu cầu một trang JSP, yêu cầu này sẽ được gửi đến máy chủ (ví dụ như Tomcat hoặc GlassFish).
+- **Máy chủ xử lý mã Java**: Máy chủ sẽ xử lý mã Java trong trang JSP và tạo ra một trang HTML động.
+- **Kết quả trả về cho trình duyệt**: Trang HTML kết quả sẽ được gửi lại cho trình duyệt, và trình duyệt sẽ hiển thị nội dung như một trang HTML tĩnh.
 
-### How JSP Files are Processed
-**Server-Side Processing**: JSP files are processed on the server before they are sent to the user's browser. Servers like Tomcat or GlassFish handle the JSP files by executing the Java code and embedding the results into the HTML that is returned to the client.
+Ví dụ: Bạn yêu cầu một trang JSP để hiển thị thời gian hiện tại trên máy chủ. Máy chủ sẽ chạy mã Java để lấy thời gian hiện tại, sau đó chèn thời gian này vào một trang HTML và trả kết quả lại cho trình duyệt.
 
-**Example Process**:
-1. A user requests a JSP page through their web browser.
-2. The server processes the JSP file, executing any Java code it contains.
-3. The output of the Java code is combined with the HTML content, and this final HTML is sent back to the browser.
+## 2. Tạo Dự Án JSP Trong Eclipse
 
-### Placing JSP Files in Your Project
-**File Location**: JSP files should be placed within the `WebContent` folder of your web project. This folder is where all the web-accessible files, including HTML, CSS, and JSP files, reside.
+Bây giờ, chúng ta sẽ tạo một dự án JSP mới trong Eclipse để bắt đầu viết mã.
 
-**Naming Convention**: JSP files must have the `.jsp` extension to be recognized by the server as JSP files. For example, a file named `HelloWorld.jsp` would be placed in the `WebContent` folder.
+1. **Tạo Dự Án Mới**:
+   - Mở Eclipse.
+   - Chọn **File** -> **New** -> **Dynamic Web Project**.
+   - Nhập tên dự án, ví dụ: `JSPDemo`.
+   - Nhấp vào **Next** và chọn **Finish**.
 
-**Example Project Setup**:
-- Create a new Eclipse project.
-- Place your `HelloWorld.jsp` file in the `WebContent` folder.
-- The structure will resemble that of a typical website, but with JSP files instead of just HTML files.
+2. **Thiết Lập Thư Mục Dự Án**:
+   - Khi tạo dự án, Eclipse sẽ tạo ra một thư mục có tên **WebContent**. Đây là nơi bạn sẽ đặt các tệp JSP của mình.
+   - Bạn có thể tùy chỉnh cấu trúc dự án bằng cách thêm các thư mục con nếu cần thiết.
 
-### Writing a Basic "Hello World" JSP Program
-**Code Breakdown**: A simple "Hello World" JSP program combines HTML and Java code to display a message along with the current server time.
+## 3. Tạo Tệp JSP "Hello World"
 
-**Example Code**:
-```html
+Bây giờ, chúng ta sẽ tạo tệp JSP đầu tiên trong dự án.
+
+1. Nhấp chuột phải vào thư mục **WebContent**, chọn **New** -> **File**.
+2. Đặt tên tệp là `helloworld.jsp` và nhấp vào **Finish**.
+
+### Nội Dung Tệp `helloworld.jsp`
+
+Dán đoạn mã dưới đây vào tệp `helloworld.jsp`:
+
+```jsp
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World JSP</title>
+</head>
 <body>
     <h3>Hello World of Java</h3>
-    The time on the server is: 
-    <%= new java.util.Date() %>
+    <p>The time on the server is: <%= new java.util.Date() %></p>
 </body>
+</html>
 ```
-**Explanation**:
-- The `<%= ... %>` syntax is used to include Java expressions directly in the HTML.
-- In this case, `new java.util.Date()` creates a new Date object, which retrieves the current timestamp.
-- The timestamp is then included in the HTML output that is sent to the browser.
 
-### Running the JSP Program in Eclipse
-**Step-by-Step**:
-1. **Create a Web Project**: In Eclipse, go to `File > New > Dynamic Web Project` and name your project (e.g., `JSPDemo`).
-2. **Modify Source Folders**: Adjust the source folders to stay consistent with your previous projects.
-3. **Place the JSP File**: Create a new `HelloWorld.jsp` file in the `WebContent` folder.
-4. **Write the Code**: Add the basic HTML and JSP code as shown earlier.
-5. **Run the Program**: Right-click the JSP file in Eclipse, choose `Run As > Run on Server`, and select the Tomcat server.
+### Giải Thích:
+- **Thẻ `<%=%>`**: Đây là cách bạn chèn mã Java vào trang JSP. Mã Java trong thẻ này sẽ được thực thi trên server và kết quả sẽ được chèn vào trang HTML.
+- **`new java.util.Date()`**: Tạo một đối tượng `Date` để hiển thị thời gian hiện tại trên server.
 
-**Result**: The program runs on the Tomcat server, and you can view the output in your browser, which will display "Hello World of Java" along with the current server time.
+## 4. Chạy Chương Trình JSP
 
-### Viewing the Output in a Browser
-**Process**:
-- After running the JSP file on the server, you can copy the URL and open it in any web browser.
-- The browser will display the HTML output generated by the JSP file, including the dynamically generated timestamp.
+Bây giờ, chúng ta sẽ chạy chương trình JSP và xem kết quả.
 
-**Example**: When you view the source code of the resulting page in the browser, you will see the final HTML, with no trace of the original Java code. This illustrates how the JSP file was processed server-side and sent to the browser as plain HTML.
+1. Nhấp chuột phải vào tệp `helloworld.jsp`.
+2. Chọn **Run As** -> **Run on Server**.
+3. Chọn máy chủ đã được cấu hình trước (ví dụ: Apache Tomcat 8) và nhấp vào **Finish**.
 
-### Conclusion: Basic Understanding of JSP
-This tutorial provided an overview of how to create a basic "Hello World" JSP program, where to place your JSP files, and how they are processed by the server. As we continue, we will dive deeper into JSP features and explore more complex examples.
+Khi chạy thành công, trình duyệt sẽ mở ra và hiển thị kết quả:
 
-Stay tuned for the next video, where we will build upon this foundation and explore advanced JSP functionalities.
+```
+Hello World of Java
+The time on the server is: [Thời gian hiện tại trên máy chủ]
+```
 
+### Kiểm Tra Mã Nguồn Trang HTML
+- Bạn có thể nhấp chuột phải vào trang và chọn **View Page Source** để xem mã nguồn HTML đã được tạo.
+- Bạn sẽ thấy mã HTML đã hiển thị nội dung động với thời gian hiện tại mà không chứa mã Java, vì mã Java đã được xử lý trên server.
+
+## 5. Giải Thích Quy Trình Hoạt Động
+
+1. **Trình duyệt gửi yêu cầu đến server**: Trình duyệt gửi yêu cầu đến server để lấy trang `helloworld.jsp`.
+2. **Server xử lý mã Java**: Server xử lý mã Java trong thẻ `<%= %>`.
+3. **Tạo ra trang HTML động**: Server tạo ra trang HTML động với kết quả thời gian hiện tại và trả lại cho trình duyệt.
+4. **Trình duyệt hiển thị kết quả**: Trình duyệt nhận và hiển thị trang HTML đã được tạo.
+
+## 6. Tổng Kết
+
+Trong bài học này, bạn đã biết cách tạo một chương trình "Hello World" đơn giản với JSP. Đây là một ví dụ cơ bản để bạn hiểu cách thức hoạt động của JSP trong việc xử lý mã Java và tạo nội dung HTML động.
+
+### Những Điều Bạn Có Thể Làm Tiếp Theo
+- Thử thêm các thành phần Java khác như vòng lặp (`for`, `while`) hoặc điều kiện (`if-else`) vào trang JSP.
+- Kết nối với cơ sở dữ liệu để hiển thị thông tin động từ cơ sở dữ liệu lên trang web.
+- Sử dụng các thẻ tùy chỉnh trong JSP để viết mã dễ đọc hơn và tách biệt logic xử lý.
+
+Hãy tiếp tục khám phá và thử nghiệm với JSP để xây dựng các trang web động theo ý tưởng của bạn!
