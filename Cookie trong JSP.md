@@ -1,4 +1,4 @@
-# Sử dụng Cookie trong JSP: Hướng dẫn chi tiết
+# Sử dụng Cookie trong JSP
 
 Trong bài viết này, chúng ta sẽ tìm hiểu cách sử dụng Cookie trong JSP (JavaServer Pages). Chúng ta sẽ khám phá các khái niệm cơ bản về Cookie, cách tạo và đọc Cookie trong JSP, và xây dựng một ví dụ thực tế để minh họa.
 
