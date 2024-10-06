@@ -174,15 +174,50 @@ Trang JSP này sẽ hiển thị danh sách sinh viên dưới dạng bảng HTM
 **Giải Thích**:
 - `c:forEach var="student" items="${student_list}"` dùng để lặp qua danh sách `student_list` (do Servlet gửi tới) và hiển thị từng phần tử dưới dạng bảng HTML (`<table>`).
 
-### 6. Chạy Ứng Dụng Và Kiểm Tra
-- Truy cập `http://localhost:8080/YourAppName/MvcDemoServlet`.
-- Controller (`MvcDemoServlet`) sẽ lấy danh sách sinh viên từ Model (`StudentDataUtil`) và gửi dữ liệu tới `view_students.jsp`.
-- Trang JSP sẽ hiển thị danh sách sinh viên dưới dạng bảng.
 
-### 7. Lưu Ý Quan Trọng Khi Sử Dụng MVC Với Servlets và JSP
+
+### 6. Bước 5: Tạo Trang `index.html` Chứa Liên Kết Đến `Servlet`
+1. Tạo một tệp HTML mới trong thư mục `WebContent`:
+   - Nhấp chuột phải vào thư mục `WebContent` > Chọn `New` > `File`.
+   - Đặt tên tệp là `index.html` và nhấp vào `Finish`.
+2. Cập nhật nội dung của `index.html` như sau:
+
+```html
+<html>
+<head>
+    <title>Trang Chủ</title>
+</head>
+<body>
+    <h2>Chào mừng đến với Ứng Dụng MVC Demo</h2>
+    <!-- Tạo liên kết đến Servlet MvcDemoServletTwo -->
+    <a href="MvcDemoServlet">View Students with MVC</a>
+</body>
+</html>
+```
+
+**Giải Thích:**
+- Tạo một liên kết đơn giản `a href="MvcDemoServlet"` trỏ đến `Servlet` `MvcDemoServlet.java`.
+- Khi người dùng nhấp vào liên kết, yêu cầu sẽ được gửi đến `Servlet` và `Servlet` sẽ xử lý yêu cầu, chuyển tiếp dữ liệu đến `view_students.jsp` để hiển thị.
+
+### 7. Bước 6: Kiểm Tra Hoạt Động Của Ứng Dụng
+1. **Chạy máy chủ (Server)**: Đảm bảo rằng máy chủ (Tomcat hoặc bất kỳ máy chủ nào bạn sử dụng) đã được khởi động.
+2. **Truy cập `index.html`**:
+   - Nhấp chuột phải vào `index.html` > Chọn `Run As` > `Run on Server`.
+   - Trình duyệt sẽ mở `index.html` với một liên kết “View Students with MVC”.
+3. **Kiểm tra kết quả**:
+   - Nhấp vào liên kết “View Students with MVC”.
+   - Bạn sẽ thấy trang `view_students.jsp` hiển thị danh sách sinh viên dưới dạng bảng HTML với các cột `First Name`, `Last Name` và `Email`.
+
+### Kết Luận
+Với những bước trên, chúng ta đã hoàn thành ứng dụng MVC đầy đủ: 
+- `Servlet` (`MvcDemoServlet`) xử lý logic và tương tác với dữ liệu.
+- `StudentDataUtil` cung cấp dữ liệu (Model).
+- `view_students.jsp` hiển thị dữ liệu cho người dùng (View).
+- `index.html` giúp điều hướng và trải nghiệm ứng dụng dễ dàng hơn.
+
+
+
+### 8. Lưu Ý Quan Trọng Khi Sử Dụng MVC Với Servlets và JSP
 1. **Không viết mã HTML trong Servlet**: Việc sử dụng `out.println` để tạo mã HTML trong Servlet sẽ làm mã nguồn phức tạp và khó bảo trì.
 2. **Tránh viết mã Java trong JSP**: Sử dụng JSTL để mã nguồn trở nên gọn gàng và dễ hiểu hơn.
 3. **Đảm bảo đường dẫn trong `RequestDispatcher` chính xác**: Đảm bảo rằng đường dẫn JSP trùng khớp với cấu hình trong Servlet.
-
-### 8. Kết Luận
-Mô hình MVC với Servlets và JSP giúp tổ chức mã nguồn dễ dàng hơn, tách biệt logic và giao diện. Bằng cách hiểu rõ cách kết hợp các thành phần này, bạn sẽ có thể xây dựng các ứng dụng web mạnh mẽ và linh hoạt hơn. Hãy thử áp dụng mô hình MVC vào dự án của bạn và cảm nhận sự khác biệt! 😄
