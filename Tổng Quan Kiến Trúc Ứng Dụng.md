@@ -33,9 +33,10 @@ Các lợi ích của DAO trong ứng dụng:
 - **Dễ dàng bảo trì và mở rộng**: Khi cần thay đổi cấu trúc cơ sở dữ liệu hoặc cải thiện hiệu suất truy vấn, bạn chỉ cần chỉnh sửa ở lớp DAO mà không ảnh hưởng đến các phần khác của ứng dụng.
 
   
+### Lý do gọi là **"Utility"**:  
+
   Trong lập trình, thuật ngữ **"Utility"** thường được dùng để mô tả các lớp hoặc phương thức cung cấp các chức năng hoặc tiện ích chung, hỗ trợ cho các tác vụ cụ thể nhưng không trực tiếp liên quan đến logic nghiệp vụ chính của ứng dụng. Chúng là những "trợ lý" giúp thực hiện các nhiệm vụ chung lặp đi lặp lại hoặc các thao tác phụ trợ trong một ứng dụng.
 
-### Lý do gọi là **"Utility"**:
 1. **Cung cấp các hàm chung**: Lớp có từ "Utility" trong tên thường bao gồm các phương thức, công cụ dùng chung trong nhiều phần của ứng dụng. Trong trường hợp này, `Student Database Utility (StudentDAO)` cung cấp các phương thức tiện ích để thực hiện các thao tác cơ sở dữ liệu như kết nối, truy vấn, đóng kết nối,... Những chức năng này được sử dụng lặp đi lặp lại trong các phần khác nhau của ứng dụng.
 
 2. **Tách biệt logic xử lý**: Lớp "Utility" giúp tách biệt logic xử lý cơ sở dữ liệu khỏi phần chính của ứng dụng (chẳng hạn như `Servlet` trong trường hợp này). Điều này giúp mã nguồn trở nên rõ ràng hơn, dễ bảo trì và giảm thiểu sự lặp lại.
