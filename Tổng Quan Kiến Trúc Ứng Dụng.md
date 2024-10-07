@@ -31,6 +31,8 @@ Các lợi ích của DAO trong ứng dụng:
 - **Tách biệt logic truy vấn cơ sở dữ liệu**: DAO giúp tách biệt hoàn toàn các câu lệnh SQL và các phương thức truy vấn ra khỏi lớp Controller, giúp Controller chỉ tập trung vào việc điều phối xử lý.
 - **Tái sử dụng mã nguồn**: Một lớp DAO có thể được sử dụng lại bởi nhiều Controller khác nhau, giúp giảm bớt sự lặp lại trong mã nguồn.
 - **Dễ dàng bảo trì và mở rộng**: Khi cần thay đổi cấu trúc cơ sở dữ liệu hoặc cải thiện hiệu suất truy vấn, bạn chỉ cần chỉnh sửa ở lớp DAO mà không ảnh hưởng đến các phần khác của ứng dụng.
+
+  
   Trong lập trình, thuật ngữ **"Utility"** thường được dùng để mô tả các lớp hoặc phương thức cung cấp các chức năng hoặc tiện ích chung, hỗ trợ cho các tác vụ cụ thể nhưng không trực tiếp liên quan đến logic nghiệp vụ chính của ứng dụng. Chúng là những "trợ lý" giúp thực hiện các nhiệm vụ chung lặp đi lặp lại hoặc các thao tác phụ trợ trong một ứng dụng.
 
 ### Lý do gọi là **"Utility"**:
