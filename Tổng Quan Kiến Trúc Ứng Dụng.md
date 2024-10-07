@@ -31,3 +31,18 @@ Các lợi ích của DAO trong ứng dụng:
 - **Tách biệt logic truy vấn cơ sở dữ liệu**: DAO giúp tách biệt hoàn toàn các câu lệnh SQL và các phương thức truy vấn ra khỏi lớp Controller, giúp Controller chỉ tập trung vào việc điều phối xử lý.
 - **Tái sử dụng mã nguồn**: Một lớp DAO có thể được sử dụng lại bởi nhiều Controller khác nhau, giúp giảm bớt sự lặp lại trong mã nguồn.
 - **Dễ dàng bảo trì và mở rộng**: Khi cần thay đổi cấu trúc cơ sở dữ liệu hoặc cải thiện hiệu suất truy vấn, bạn chỉ cần chỉnh sửa ở lớp DAO mà không ảnh hưởng đến các phần khác của ứng dụng.
+  Trong lập trình, thuật ngữ **"Utility"** thường được dùng để mô tả các lớp hoặc phương thức cung cấp các chức năng hoặc tiện ích chung, hỗ trợ cho các tác vụ cụ thể nhưng không trực tiếp liên quan đến logic nghiệp vụ chính của ứng dụng. Chúng là những "trợ lý" giúp thực hiện các nhiệm vụ chung lặp đi lặp lại hoặc các thao tác phụ trợ trong một ứng dụng.
+
+### Lý do gọi là **"Utility"**:
+1. **Cung cấp các hàm chung**: Lớp có từ "Utility" trong tên thường bao gồm các phương thức, công cụ dùng chung trong nhiều phần của ứng dụng. Trong trường hợp này, `Student Database Utility (StudentDAO)` cung cấp các phương thức tiện ích để thực hiện các thao tác cơ sở dữ liệu như kết nối, truy vấn, đóng kết nối,... Những chức năng này được sử dụng lặp đi lặp lại trong các phần khác nhau của ứng dụng.
+
+2. **Tách biệt logic xử lý**: Lớp "Utility" giúp tách biệt logic xử lý cơ sở dữ liệu khỏi phần chính của ứng dụng (chẳng hạn như `Servlet` trong trường hợp này). Điều này giúp mã nguồn trở nên rõ ràng hơn, dễ bảo trì và giảm thiểu sự lặp lại.
+
+3. **Không chứa logic nghiệp vụ phức tạp**: Các lớp "Utility" không phải là phần cốt lõi giải quyết bài toán nghiệp vụ mà chỉ là công cụ hỗ trợ. Ví dụ, `Student Database Utility (StudentDAO)` chỉ thực hiện việc truy vấn và quản lý kết nối với cơ sở dữ liệu mà không chứa logic quản lý sinh viên (như tính toán điểm số hoặc xếp hạng của sinh viên).
+
+### Ví dụ:
+Trong `Student Database Utility (StudentDAO)`, chúng ta có các phương thức như `getStudents()` để lấy danh sách sinh viên từ cơ sở dữ liệu. Những phương thức này được sử dụng nhiều lần trong nhiều nơi của ứng dụng, nhưng chúng không phải là logic nghiệp vụ chính. Chúng chỉ cung cấp các tiện ích giúp lấy dữ liệu từ cơ sở dữ liệu một cách dễ dàng và nhất quán.
+
+### Tóm lại:
+Các lớp **Utility** như `Student Database Utility (StudentDAO)` được gọi như vậy vì chúng cung cấp các chức năng tiện ích, giúp tối ưu hóa và tái sử dụng code, đồng thời tách biệt các tác vụ phụ trợ khỏi logic chính của ứng dụng, giúp mã nguồn dễ hiểu, dễ bảo trì hơn.
+  
