@@ -1,4 +1,4 @@
-### Bước 3: Tạo và Sử Dụng CSS trong Ứng Dụng Quản Lý Sinh Viên
+### Bước 5: Tạo và Sử Dụng CSS trong Ứng Dụng Quản Lý Sinh Viên
 
 Sau khi hoàn thành việc tạo trang JSP và hiển thị danh sách sinh viên, trong bước này, chúng ta sẽ cải thiện giao diện của bảng bằng cách sử dụng **Cascading Style Sheets (CSS)** để làm cho bảng trở nên trực quan và thu hút hơn.
 
