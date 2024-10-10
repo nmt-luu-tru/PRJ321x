@@ -1,3 +1,5 @@
+https://(fu.)udemy.com/course/jsp-tutorial/learn/lecture/4200098#notes  
+
 ### Thêm Liên Kết "Đổi Ngôn Ngữ" Vào Ứng Dụng Sử Dụng JSTL
 
 Trong video này, chúng ta sẽ tìm hiểu cách thêm liên kết đổi ngôn ngữ vào trang web sử dụng **JSTL Internationalization**.
