@@ -1,4 +1,3 @@
-Tôi xin lỗi về sự thiếu sót. Dưới đây là phần trả lời của bạn đã được chèn cả hai hình ảnh theo yêu cầu:
 
 ### Giới thiệu về JSP và Servlets
 
